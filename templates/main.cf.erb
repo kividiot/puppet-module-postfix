@@ -102,6 +102,10 @@ relay_domains = <%= @main_relay_domains %>
 <% if @main_use_relayhost -%>
 relayhost = <%= @main_relayhost_real %>:<%= @main_relayhost_port_real %>
 <% end -%>
+<% if @main_smtpd_relay_restrictions -%>
+
+smtpd_relay_restrictions = <%= @main_smtpd_relay_restrictions %>
+<% end -%>
 
 # setgid_group = postdrop
 setgid_group = <%= @main_setgid_group_real %>

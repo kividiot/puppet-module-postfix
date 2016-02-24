@@ -38,6 +38,7 @@ class postfix (
   $main_smtpd_tls_key_file            = undef,
   $main_smtpd_tls_cert_file           = undef,
   $main_smtpd_tls_session_cache_database = undef,
+  $main_smtpd_relay_restrictions      = undef,
   $packages                           = 'USE_DEFAULTS',
   $service_enable                     = true,
   $service_ensure                     = 'running',
