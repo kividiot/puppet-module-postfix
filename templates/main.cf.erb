@@ -91,7 +91,9 @@ relay_domains = <%= @main_relay_domains %>
 <% end -%>
 
 # relayhost =
+<% if @main_use_relayhost -%>
 relayhost = <%= @main_relayhost_real %>:<%= @main_relayhost_port_real %>
+<% end -%>
 
 # setgid_group = postdrop
 setgid_group = <%= @main_setgid_group_real %>

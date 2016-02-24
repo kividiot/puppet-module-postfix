@@ -21,6 +21,7 @@ class postfix (
   $main_queue_directory               = 'USE_DEFAULTS',
   $main_recipient_delimiter           = '+',
   $main_relay_domains                 = undef,
+  $main_use_relayhost                 = true,
   $main_relayhost                     = "mailhost.${::domain}",
   $main_relayhost_port                = '25',
   $main_setgid_group                  = 'USE_DEFAULTS',
@@ -214,6 +215,7 @@ class postfix (
   validate_absolute_path($main_queue_directory_real)
   # main_recipient_delimiter can not be checkek, it can contain nothing to everything
   if $main_relay_domains { validate_string($main_relay_domains) }
+  validate_bool($main_use_relayhost)
   if is_domain_name($main_relayhost_real) == false { fail("main_relayhost must be a domain name and is set to <${$main_relayhost_real}>") }
   if is_integer($main_relayhost_port_real) == false { fail("main_relayhost_port must be an integer and is set to <${$main_relayhost_port_real}>") }
   if empty($main_setgid_group_real) == true { fail("main_setgid_group must contain a valid value and is set to <${main_setgid_group_real}>") }
