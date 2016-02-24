@@ -14,6 +14,7 @@ class postfix (
   $main_inet_protocols                = 'ipv4',
   $main_mailbox_command               = undef,
   $main_mailbox_size_limit            = '0',
+  $main_message_size_limit            = undef,
   $main_mydestination                 = 'localhost',
   $main_myhostname                    = $::fqdn,
   $main_mynetworks                    = '127.0.0.0/8',

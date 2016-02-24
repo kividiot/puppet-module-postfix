@@ -74,6 +74,11 @@ mailbox_command = <%= @main_mailbox_command %>
 # mailbox_size_limit = 51200000
 mailbox_size_limit = <%= @main_mailbox_size_limit_real %>
 
+# message_size_limit = 10240000
+<% if @main_message_size_limit -%>
+message_size_limit = <%= @@main_message_size_limit %>
+<% end -%>
+
 # mydestination = $myhostname, localhost.$mydomain, localhost
 mydestination = <%= @main_mydestination_real %>
 
