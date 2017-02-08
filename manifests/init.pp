@@ -32,6 +32,7 @@ class postfix (
   $main_smtp_tls_session_cache_database = undef,
   $main_smtp_tls_mandatory_protocols  = undef,
   $main_smtp_tls_protocols            = undef,
+  $main_tls_high_cipherlist           = undef,
   $main_smtp_tls_mandatory_ciphers    = undef,
   $main_smtp_tls_security_level       = undef,
   $main_smtpd_tls_mandatory_protocols = undef,
