@@ -58,6 +58,10 @@ smtpd_tls_protocols = <%= @main_smtpd_tls_protocols %>
 
 smtpd_tls_mandatory_ciphers = <%= @main_smtpd_tls_mandatory_ciphers %>
 <% end -%>
+<% if @main_tls_high_cipherlist -%>
+
+tls_high_cipherlist = <%= @main_tls_high_cipherlist %>
+<% end -%>
 <% if @main_smtpd_tls_security_level -%>
 
 smtpd_tls_security_level = <%= @main_smtpd_tls_security_level %>
