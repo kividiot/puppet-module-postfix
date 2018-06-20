@@ -16,6 +16,7 @@ class postfix (
   $main_mailbox_size_limit            = '0',
   $main_message_size_limit            = undef,
   $main_mydestination                 = 'localhost',
+  $main_mydomain                      = undef,
   $main_myhostname                    = $::fqdn,
   $main_mynetworks                    = '127.0.0.0/8',
   $main_myorigin                      = '$myhostname',
@@ -35,6 +36,9 @@ class postfix (
   $main_tls_high_cipherlist           = undef,
   $main_smtp_tls_mandatory_ciphers    = undef,
   $main_smtp_tls_security_level       = undef,
+  $main_smtpd_helo_required           = undef,
+  $main_smtpd_helo_restrictions       = undef,
+  $main_smtpd_recipient_restrictions  = undef,
   $main_smtpd_tls_mandatory_protocols = undef,
   $main_smtpd_tls_protocols           = undef,
   $main_smtpd_tls_mandatory_ciphers   = undef,
@@ -81,9 +85,10 @@ class postfix (
       $main_mailbox_size_limit_default  = 51200000
       $main_mydestination_default       = '$myhostname, localhost.$mydomain, localhost'
       $main_queue_directory_default     = '/var/spool/postfix'
-      $main_recipient_delimiter_default = ''
+      $main_recipient_delimiter_default = undef
       $main_setgid_group_default        = 'postdrop'
       $packages_default                 = 'postfix'
+      $os_defaults_missing              = false
     }
     'RedHat': {
       $main_command_directory_default   = '/usr/sbin'
@@ -92,9 +97,10 @@ class postfix (
       $main_mailbox_size_limit_default  = 51200000
       $main_mydestination_default       = '$myhostname, localhost.$mydomain, localhost'
       $main_queue_directory_default     = '/var/spool/postfix'
-      $main_recipient_delimiter_default = ''
+      $main_recipient_delimiter_default = undef
       $main_setgid_group_default        = 'postdrop'
       $packages_default                 = 'postfix'
+      $os_defaults_missing              = false
     }
     'Suse': {
       $main_command_directory_default   = '/usr/sbin'
@@ -103,9 +109,10 @@ class postfix (
       $main_mailbox_size_limit_default  = 51200000
       $main_mydestination_default       = '$myhostname, localhost.$mydomain, localhost'
       $main_queue_directory_default     = '/var/spool/postfix'
-      $main_recipient_delimiter_default = ''
+      $main_recipient_delimiter_default = undef
       $main_setgid_group_default        = 'maildrop'
       $packages_default                 = 'postfix'
+      $os_defaults_missing              = false
     }
     default: {
       $os_defaults_missing = true
@@ -229,6 +236,7 @@ class postfix (
   if is_integer($main_mailbox_size_limit_real) == false { fail("main_mailbox_size_limit must be an integer and is set to <${main_mailbox_size_limit_real}>") }
   if $main_mailbox_size_limit_real + 0 < 0 { fail("main_mailbox_size_limit needs a minimum value of 0 and is set to <${main_mailbox_size_limit_real}>") }
   validate_string($main_mydestination_real)
+  if $main_mydomain != undef and is_domain_name($main_mydomain) == false { fail("main_mydomain must be a domain name and is set to <${main_mydomain}>") }
   if is_domain_name($main_myhostname_real) == false { fail("main_myhostname must be a domain name and is set to <${main_myhostname_real}>") }
   if empty($main_mynetworks_real) == true { fail("main_mynetworks must contain a valid value and is set to <${main_mynetworks_real}>") }
   validate_string($main_mynetworks_real)
@@ -275,6 +283,9 @@ class postfix (
   validate_string($main_smtpd_tls_security_level)
   if $main_smtpd_tls_key_file != undef { validate_absolute_path($main_smtpd_tls_key_file) }
   if $main_smtpd_tls_cert_file != undef { validate_absolute_path($main_smtpd_tls_cert_file) }
+  if $main_smtpd_helo_required != undef { validate_re($main_smtpd_helo_required, '^(yes|no)$', "main_smtpd_helo_required may be either 'yes' or 'no' and is set to <${main_smtpd_helo_required}>") }
+  if $main_smtpd_helo_restrictions != undef { validate_array($main_smtpd_helo_restrictions) }
+  if $main_smtpd_recipient_restrictions != undef { validate_array($main_smtpd_recipient_restrictions) }
   # </validating variables>
 
   # <Install & Config>
@@ -290,7 +301,7 @@ class postfix (
     hasrestart => $service_hasrestart_real,
     hasstatus  => $service_hasstatus_real,
     require    => Package[$packages_real],
-    subscribe  => [ File['postfix_main.cf'], File['postfix_virtual'], File['postfix_transport'], ]
+    subscribe  => [ File['postfix_main.cf'], File['postfix_virtual'], File['postfix_transport'], ],
   }
 
   file  { 'postfix_main.cf' :

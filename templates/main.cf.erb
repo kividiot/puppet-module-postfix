@@ -46,6 +46,18 @@ smtp_tls_security_level = <%= @main_smtp_tls_security_level %>
 
 smtp_tls_session_cache_database = <%= @main_smtp_tls_session_cache_database %>
 <% end -%>
+<% if @main_smtpd_helo_required -%>
+
+smtpd_helo_required = <%= @main_smtpd_helo_required %>
+<% end -%>
+<% if @main_smtpd_helo_restrictions -%>
+
+smtpd_helo_restrictions = <%= @main_smtpd_helo_restrictions.join(",\n    ") %>
+<% end -%>
+<% if @main_smtpd_recipient_restrictions -%>
+
+smtpd_recipient_restrictions = <%= @main_smtpd_recipient_restrictions.join(",\n    ") %>
+<% end -%>
 <% if @main_smtpd_tls_mandatory_protocols -%>
 
 smtpd_tls_mandatory_protocols = <%= @main_smtpd_tls_mandatory_protocols %>
@@ -97,6 +109,10 @@ message_size_limit = <%= @main_message_size_limit %>
 
 # mydestination = $myhostname, localhost.$mydomain, localhost
 mydestination = <%= @main_mydestination_real %>
+<% if @main_mydomain -%>
+
+mydomain = <%= @main_mydomain %>
+<% end -%>
 
 # myhostname = <%= @hostname %>.localdomain (Debian, Suse & Ubuntu)
 # myhostname = <%= @fqdn %> (RHEL)
