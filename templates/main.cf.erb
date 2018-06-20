@@ -144,3 +144,6 @@ maximal_queue_lifetime = <%= @main_maximal_queue_lifetime %>
 minimal_backoff_time = <%= @main_minimal_backoff_time %>
 queue_run_delay = <%= @main_queue_run_delay %>
 
+<% if @main_smtp_fallback_relay -%>
+smtp_fallback_relay = <%= @main_smtp_fallback_relay %>
+<% end -%>

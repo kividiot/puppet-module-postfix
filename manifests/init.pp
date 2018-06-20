@@ -47,6 +47,7 @@ class postfix (
   $main_maximal_backoff_time          = '4000s',
   $main_maximal_queue_lifetime        = '5d',
   $main_minimal_backoff_time          = '300s',
+  $main_smtp_fallback_relay           = undef,
   $packages                           = 'USE_DEFAULTS',
   $service_enable                     = true,
   $service_ensure                     = 'running',
