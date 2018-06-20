@@ -78,6 +78,10 @@ smtpd_tls_cert_file = <%= @main_smtpd_tls_cert_file %>
 
 smtpd_tls_session_cache_database = <%= @main_smtpd_tls_session_cache_database %>
 <% end -%>
+<% if @main_smtp_tls_policy_maps -%>
+
+smtp_tls_policy_maps = hash:<%= @main_smtp_tls_policy_maps %>
+<% end -%>
 <% if @main_mailbox_command -%>
 
 mailbox_command = <%= @main_mailbox_command %>

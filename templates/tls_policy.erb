@@ -1,0 +1,8 @@
+# This file is being maintained by Puppet.
+# DO NOT EDIT
+
+<% if @main_smtp_tls_policy_maps_content -%>
+<% @main_smtp_tls_policy_maps_content.sort.each do |domain, policy| -%>
+<%= domain %>		<%= policy %>
+<% end -%>
+<% end -%>

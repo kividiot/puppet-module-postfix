@@ -56,6 +56,8 @@ class postfix (
   $main_smtp_mx_session_limit              = 2,
   $main_smtpd_client_connection_count_limit    = 50,
   $main_smtp_destination_concurrency_limit = 20,
+  $main_smtp_tls_policy_maps          = undef,
+  $main_smtp_tls_policy_maps_content  = undef,
   $packages                           = 'USE_DEFAULTS',
   $service_enable                     = true,
   $service_ensure                     = 'running',
@@ -299,6 +301,24 @@ class postfix (
     mode    => '0644',
     content => template($template_main_cf_real),
     require => Package[$packages_real],
+  }
+
+  if $main_smtp_tls_policy_maps != undef {
+
+    file { 'main_smtp_tls_policy_maps':
+      ensure  => file,
+      path    => "$main_smtp_tls_policy_maps",
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0644',
+      content => template('postfix/tls_policy.erb'),
+      require => Package[$packages_real],
+    }
+    exec { 'postfix_rebuild_smtp_tls_policy':
+      command     => "${main_command_directory_real}/postmap ${main_smtp_tls_policy_maps}",
+      refreshonly => true,
+      subscribe   => File['main_smtp_tls_policy_maps'],
+    }
   }
 
   if $virtual_aliases != undef {
