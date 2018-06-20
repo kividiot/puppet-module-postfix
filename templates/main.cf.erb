@@ -144,6 +144,15 @@ maximal_queue_lifetime = <%= @main_maximal_queue_lifetime %>
 minimal_backoff_time = <%= @main_minimal_backoff_time %>
 queue_run_delay = <%= @main_queue_run_delay %>
 
+default_process_limit = <%= @main_default_process_limit %>
+qmgr_message_active_limit = <%= @main_qmgr_message_active_limit %>
+qmgr_message_recipient_limit = <%= @main_qmgr_message_recipient_limit %>
+default_destination_concurrency_limit = <%= @main_default_destination_concurrency_limit %>
+default_destination_recipient_limit = <%= @main_default_destination_recipient_limit %>
+smtp_mx_session_limit = <%= @main_mtp_mx_session_limit%>
+smtpd_client_connection_count_limit = <%= @main_smtpd_client_connection_count_limit %>
+smtp_destination_concurrency_limit = <%= @main_smtp_destination_concurrency_limit %>
+
 <% if @main_smtp_fallback_relay -%>
 smtp_fallback_relay = <%= @main_smtp_fallback_relay %>
 <% end -%>
