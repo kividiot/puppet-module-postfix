@@ -73,6 +73,7 @@ class postfix (
   $transport_maps_external            = false,
   $virtual_aliases                    = undef,
   $virtual_aliases_external           = false,
+  $enable_polite                      = false,
 ) {
 
   # <provide os default values>
@@ -382,6 +383,16 @@ class postfix (
     file { 'postfix_transport_db':
       ensure => absent,
       path   => '/etc/postfix/transport.db',
+    }
+  }
+  if $enable_polite {
+    file_line {'Append a line to /etc/postfix/master.cf':
+      path => '/etc/postfix/master.cf',  
+      line => 'polite unix - - n - - smtp',
+    }
+    file_line {'Append a line to /etc/postfix/master.cf':
+      path => '/etc/postfix/master.cf',  
+      line => 'turtle unix - - n - - smtp',
     }
   }
   # </Install & Config>

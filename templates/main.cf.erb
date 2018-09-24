@@ -176,3 +176,15 @@ smtp_destination_concurrency_limit = <%= @main_smtp_destination_concurrency_limi
 <% if @main_smtp_fallback_relay -%>
 smtp_fallback_relay = <%= @main_smtp_fallback_relay %>
 <% end -%>
+<% if @enable_polite -%>
+
+# Polite policy
+polite_destination_concurrency_limit = 3
+polite_destination_rate_delay = 0
+polite_destination_recipient_limit = 5
+
+# Turtle policy
+turtle_destination_concurrency_limit = 2
+turtle_destination_rate_delay = 1s
+turtle_destination_recipient_limit = 2
+<% end -%>
