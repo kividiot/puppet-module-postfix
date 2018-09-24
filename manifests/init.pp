@@ -386,11 +386,11 @@ class postfix (
     }
   }
   if $enable_polite {
-    file_line {'Append a line to /etc/postfix/master.cf':
+    file_line {'Append a polite to /etc/postfix/master.cf':
       path => '/etc/postfix/master.cf',  
       line => 'polite unix - - n - - smtp',
     }
-    file_line {'Append a line to /etc/postfix/master.cf':
+    file_line {'Append a turtle to /etc/postfix/master.cf':
       path => '/etc/postfix/master.cf',  
       line => 'turtle unix - - n - - smtp',
     }
