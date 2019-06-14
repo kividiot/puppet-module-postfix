@@ -191,6 +191,6 @@ turtle_destination_recipient_limit = 5
 <% if @main_smtpd_milters  -%>
 smtpd_milters = <%= @main_smtpd_milters %>
 <% end -%>
-<% if @non_main_smtpd_milters  -%>
-non_smtpd_milters = <%= @non_main_smtpd_milters %>
+<% if @main_non_smtpd_milters  -%>
+non_smtpd_milters = <%= @main_non_smtpd_milters %>
 <% end -%>
