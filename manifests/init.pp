@@ -62,6 +62,8 @@ class postfix (
   $main_smtp_destination_concurrency_limit = 20,
   $main_smtp_tls_policy_maps          = undef,
   $main_smtp_tls_policy_maps_content  = undef,
+  $main_smtpd_milters                 = undef,
+  $main_non_smtpd_milters             = undef,
   $packages                           = 'USE_DEFAULTS',
   $service_enable                     = true,
   $service_ensure                     = 'running',

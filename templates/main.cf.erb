@@ -188,3 +188,9 @@ turtle_destination_concurrency_limit = 10
 turtle_destination_rate_delay = 0
 turtle_destination_recipient_limit = 5
 <% end -%>
+<% if @main_smtpd_milters  -%>
+smtpd_milters = <%= @main_smtpd_milters %>
+<% end -%>
+<% if @non_main_smtpd_milters  -%>
+non_smtpd_milters = <%= @non_main_smtpd_milters %>
+<% end -%>
