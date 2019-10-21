@@ -396,6 +396,10 @@ class postfix (
       path => '/etc/postfix/master.cf',  
       line => 'turtle unix - - n - - smtp',
     }
+    file_line {'Append a snail to /etc/postfix/master.cf':
+      path => '/etc/postfix/master.cf',  
+      line => 'snail unix - - n - - smtp',
+    }
   }
   # </Install & Config>
 

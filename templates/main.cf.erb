@@ -187,6 +187,11 @@ polite_destination_recipient_limit = 10
 turtle_destination_concurrency_limit = 10
 turtle_destination_rate_delay = 0
 turtle_destination_recipient_limit = 5
+
+# Snail policy
+snail_destination_concurrency_limit = 5
+snail_destination_rate_delay = 0
+snail_destination_recipient_limit = 2
 <% end -%>
 <% if @main_smtpd_milters  -%>
 smtpd_milters = <%= @main_smtpd_milters %>
